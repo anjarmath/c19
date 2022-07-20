@@ -92,6 +92,9 @@
             success:function(response)
             {
                 document.getElementById('result').innerHTML= response;
+            },
+            error: function(data){
+                alert("fail");
             }
         })
     });
