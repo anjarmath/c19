@@ -1,5 +1,9 @@
 flask
 tensorflow-cpu
 pillow
-gunicorn
 numpy
+jinja2>=2.11.3
+gunicorn==19.9.0
+itsdangerous==0.24
+MarkupSafe==0.23
+Werkzeug>=0.15.3
