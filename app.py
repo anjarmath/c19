@@ -1,12 +1,16 @@
 import os
-from flask import Flask, render_template, request, jsonify, url_for
+from flask import Flask, render_template, request, jsonify, url_for, send_file, send_from_directory
 from keras.utils import load_img
 from keras.utils import img_to_array
 import tensorflow as tf
 import numpy as np
 from PIL import Image
+import shutil
 
 app = Flask(__name__)
+
+app.config['UPLOAD_FOLDER'] = './img/'
+
 model = tf.keras.models.load_model('./model_vgg.h5')
 model.compile(
     loss='binary_crossentropy',
@@ -28,20 +32,22 @@ def is_grey_scale(img_path):
 
 @app.route('/', methods = ['GET'])
 def covid_detection():
+    shutil.rmtree('./img/')
+    os.mkdir('./img/')
     return render_template("index.html")
 
-@app.route('/predict', methods = ['POST'])
+@app.route('/', methods = ['POST'])
 def predict():
     imagefile = request.files['imagefile']
-    image_path = './img/' + imagefile.filename
+    image_path = os.path.join(app.config['UPLOAD_FOLDER'], imagefile.filename)
     imagefile.save(image_path)
 
     image = load_img(image_path, target_size=(224,224))
     if (is_grey_scale(image_path) == True):
-        image = img_to_array(image)
-        image = np.expand_dims(image, axis=0)
-        image = np.vstack([image])
-        prediksi = model.predict(image)
+        image1 = img_to_array(image)
+        image1 = np.expand_dims(image1, axis=0)
+        image1 = np.vstack([image1])
+        prediksi = model.predict(image1)
         skor = np.max(prediksi)
         print(skor)
         classes = np.argmax(prediksi)
@@ -52,8 +58,11 @@ def predict():
     else:
         hasil = 'Gambar tidak terdeteksi sebagai citra x-ray'
 
-    os.remove(image_path)
-    return render_template("hasil.html", result=hasil)
+    return render_template("hasil.html", result=hasil, img=imagefile.filename)
+
+@app.route('/img/<fileimg>')
+def send_uploaded_image(fileimg=''):
+    return send_from_directory( app.config['UPLOAD_FOLDER'], fileimg)
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
