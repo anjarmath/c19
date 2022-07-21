@@ -43,19 +43,32 @@
         .cr {
             color: white;
         }
+
+        .alert{
+            text-align: left;
+            width: 100%;
+        }
+
     </style>
 </head>
 <body>
     <div class="isi-container">
         <div class="container card-container text-center">
             <div class="card">
-                <div class="card-header mb-5 pt-3 pb-3">
+                <div class="card-header mb-3 pt-3 pb-3">
                     <h2>Sistem Deteksi Otomatis Covid-19</h2>
                     <h4>Berbasis Citra Chest X-Ray</h4>
                 </div>
                 <div class="card-body">
                     <form id="form-predict" action="/", method="POST" enctype="multipart/form-data">
                         <div class=" form mb-5">
+                            <div class="alert alert-info mb-5" role="alert">
+                                Harap isikan gambar dengan kriteria sebagai berikut: <br>
+                                <ul>
+                                    <li>Bermode warna grayscale</li>
+                                    <li>Merupakan citra chest x-ray</li>
+                                </ul>
+                              </div>
                             <input class="form-control mb-3" type="file" name="imagefile" id="imagefile" onchange="preview();">
                             <img id="frame" src="" class="img-fluid mb-5" />
                             {% if img %}
@@ -78,7 +91,7 @@
             </div>
         </div>
         <div class="copyright text-center">
-            <p class="cr">Dirancang oleh Tim Penelitian Hibah KBK Covid-19 <br> FMIPA Universitas Negeri Malang tahun 2022</p>
+            <p class="cr">Copyright 2022 - Tim Penelitian Hibah KBK Covid-19 <br> FMIPA Universitas Negeri Malang tahun 2022</p>
         </div>
     </div>
 
