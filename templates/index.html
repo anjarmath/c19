@@ -82,11 +82,6 @@
                             </div>
                         </div>
                     </form>
-                    <div id="result">
-                        {% if result %}
-                        Terdeteksi sebagai: <p id="hasil" class="fw-bold fs-3">{{result}}</p>
-                        {% endif %}
-                    </div>
                 </div>
             </div>
         </div>
@@ -98,24 +93,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script type="text/javascript">
-    // $(document).on('submit','#form-predict',function(e){
-    //     var form_data = new FormData($('#form-predict')[0]);
-    //     e.preventDefault();
-    //     $.ajax({
-    //         type:'POST',
-    //         url:"{{url_for('predict')}}",
-    //         data: form_data,
-    //         contentType: false,
-    //         cache: false,
-    //         processData: false,
-    //         success:function(response)
-    //         {
-    //             document.getElementById('result').innerHTML= response;
-    //         }
-    //     })
-    // });
-    </script>
     <script>
         function preview() {
             frame.src = URL.createObjectURL(event.target.files[0]);
@@ -130,16 +107,6 @@
             submitbtn.disabled = true;
             document.getElementById('result').innerHTML= '';
         }
-        // imagefile.ondragover = imagefile.ondragenter = function(evt) {
-        //     evt.preventDefault();
-        // };
-
-        // imagefile.ondrop = function(evt) {
-        //     // pretty simple -- but not for IE :(
-        //     imagefile.files = evt.dataTransfer.files;
-
-        //     evt.preventDefault();
-        // };
     </script>
 </body>
 </html>
