@@ -42,20 +42,20 @@ def predict():
     image_path = os.path.join(app.config['UPLOAD_FOLDER'], imagefile.filename)
     imagefile.save(image_path)
 
-    image = load_img(image_path, target_size=(224,224))
-    if (is_grey_scale(image_path) == True):
-        image1 = img_to_array(image)
-        image1 = np.expand_dims(image1, axis=0)
-        image1 = np.vstack([image1])
-        # prediksi = model.predict(image1)
-        # skor = np.max(prediksi)
-        # classes = np.argmax(prediksi)
-        # if skor > 0.9:
-        #     hasil = target_names[classes]
-        # else:
-        hasil='Tidak terdeteksi apapun, periksa gambar Anda'
-    else:
-        hasil = 'Gambar tidak terdeteksi sebagai citra x-ray'
+    # image = load_img(image_path, target_size=(224,224))
+    # if (is_grey_scale(image_path) == True):
+    #     image1 = img_to_array(image)
+    #     image1 = np.expand_dims(image1, axis=0)
+    #     image1 = np.vstack([image1])
+    #     # prediksi = model.predict(image1)
+    #     # skor = np.max(prediksi)
+    #     # classes = np.argmax(prediksi)
+    #     # if skor > 0.9:
+    #     #     hasil = target_names[classes]
+    #     # else:
+    #     hasil='Tidak terdeteksi apapun, periksa gambar Anda'
+    # else:
+    hasil = 'Gambar tidak terdeteksi sebagai citra x-ray'
 
     return render_template("hasil.html", result=hasil, img=imagefile.filename)
 
