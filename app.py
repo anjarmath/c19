@@ -11,12 +11,12 @@ app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = './img/'
 
-model = tf.keras.models.load_model('./model_vgg.h5')
-model.compile(
-    loss='binary_crossentropy',
-    optimizer='SGD',
-    metrics=['accuracy']
-)
+# model = tf.keras.models.load_model('./model_vgg.h5')
+# model.compile(
+#     loss='binary_crossentropy',
+#     optimizer='SGD',
+#     metrics=['accuracy']
+# )
 
 target_names = ['COVID','Normal','Viral Pneumonia']
 
@@ -47,14 +47,13 @@ def predict():
         image1 = img_to_array(image)
         image1 = np.expand_dims(image1, axis=0)
         image1 = np.vstack([image1])
-        prediksi = model.predict(image1)
-        skor = np.max(prediksi)
-        print(skor)
-        classes = np.argmax(prediksi)
-        if skor > 0.9:
-            hasil = target_names[classes]
-        else:
-            hasil='Tidak terdeteksi apapun, periksa gambar Anda'
+        # prediksi = model.predict(image1)
+        # skor = np.max(prediksi)
+        # classes = np.argmax(prediksi)
+        # if skor > 0.9:
+        #     hasil = target_names[classes]
+        # else:
+        hasil='Tidak terdeteksi apapun, periksa gambar Anda'
     else:
         hasil = 'Gambar tidak terdeteksi sebagai citra x-ray'
 
